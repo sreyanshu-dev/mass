@@ -2,6 +2,7 @@ from telethon import TelegramClient, functions, types
 import asyncio
 import os
 import random
+import time
 
 ACCOUNTS = [
     {"phone": "+917470479257", "api_id": 29400566, "api_hash": "8fd30dc496aea7c14cf675f59b74ec6f"},
