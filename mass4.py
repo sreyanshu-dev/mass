@@ -27,6 +27,7 @@ REPORT_MESSAGES = [
 SESSION_DIR = "sessions2"
 os.makedirs(SESSION_DIR, exist_ok=True)
 
+'''
 def selenium_report(account):
     chrome_options = Options()
     chrome_options.add_argument("--headless=new")
@@ -76,6 +77,7 @@ def selenium_report(account):
         return False
     finally:
         driver.quit()
+'''
 
 async def telethon_report(account):
     session_file = f"{SESSION_DIR}/{account['phone']}"
@@ -110,8 +112,8 @@ async def mass_report():
         for account in ACCOUNTS:
             if random.random() < 0.5:
                 await telethon_report(account)
-            else:
-                selenium_report(account)
+            #else:
+                #selenium_report(account)
             await asyncio.sleep(random.uniform(3, 7))
         print(f"Cycle {cycle} complete. Waiting for next round...\n")
         await asyncio.sleep(random.randint(30, 60))
