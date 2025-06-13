@@ -77,4 +77,4 @@ if __name__ == "__main__":
             asyncio.run(mass_attack())
         except:
             print("All accounts exhausted! Restarting in 60 seconds...")
-            time.sleep(60)
+            await asyncio.sleep(60)
