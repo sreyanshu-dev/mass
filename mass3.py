@@ -24,7 +24,7 @@ REPORT_MESSAGES = [
     "This channel violates Telegram policies.",
     "Repeated copyright violations. Please review."
 ]
-SESSION_DIR = "sessions"
+SESSION_DIR = "sessions2"
 os.makedirs(SESSION_DIR, exist_ok=True)
 
 def selenium_report(account):
