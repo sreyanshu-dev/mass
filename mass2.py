@@ -9,12 +9,8 @@ import os
 import random
 import time
 
-ACCOUNTS = [
-    {"phone": "+1234567890", "api_id": 12345, "api_hash": "abcdef1234567890abcdef"},
-    {"phone": "+0987654321", "api_id": 67890, "api_hash": "fedcba0987654321fedcba"}
-]
-
-TARGET_CHANNEL = "target_channel_username"
+ACCOUNTS = [{"phone": "+918360516818", "api_id": 29400566, "api_hash": "8fd30dc496aea7c14cf675f59b74ec6f"}]
+TARGET_CHANNEL = "The_Grabbers"
 REPORT_REASONS = [
     types.InputReportReasonCopyright(),
     types.InputReportReasonSpam(),
@@ -23,7 +19,7 @@ REPORT_REASONS = [
 ]
 REPORT_MESSAGES = [
     "Copyright infringement. Remove this channel.",
-    "Spam and illegal activities detected.",
+    "Spam activities detected.",
     "Violent content found. Immediate action required.",
     "This channel violates Telegram policies.",
     "Repeated copyright violations. Please review."
@@ -37,7 +33,6 @@ def selenium_report(account):
     chrome_options.add_argument("--headless=new")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
-    # You can add more options for stealth if needed
 
     driver = webdriver.Chrome(options=chrome_options)
     try:
@@ -48,21 +43,18 @@ def selenium_report(account):
         driver.get(f"https://web.telegram.org/k/#{TARGET_CHANNEL}")
         WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, "chat-info")))
 
-        # Open channel menu
         menu_btn = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, ".btn-menu"))
         )
         menu_btn.click()
         time.sleep(1)
 
-        # Click "Report"
         report_btn = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//div[contains(text(), 'Report')]"))
         )
         report_btn.click()
         time.sleep(1)
 
-        # Select reason
         reason = random.choice(["Copyright", "Spam", "Violence", "Other"])
         reason_btn = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, f"//div[contains(text(), '{reason}')]"))
@@ -70,14 +62,12 @@ def selenium_report(account):
         reason_btn.click()
         time.sleep(1)
 
-        # Fill message
         textarea = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.TAG_NAME, "textarea"))
         )
         textarea.send_keys(random.choice(REPORT_MESSAGES))
         time.sleep(1)
 
-        # Submit report
         submit_btn = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Report')]"))
         )
@@ -122,7 +112,6 @@ async def mass_report():
     while True:
         print(f"\n=== Reporting Cycle {cycle} ===")
         for account in ACCOUNTS:
-            # Randomly choose method
             if random.random() < 0.5:
                 await telethon_report(account)
             else:
