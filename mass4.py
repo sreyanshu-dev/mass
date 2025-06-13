@@ -9,11 +9,7 @@ import os
 import random
 import time
 
-ACCOUNTS = [
-    {"phone": "+1234567890", "api_id": 12345, "api_hash": "abcdef1234567890abcdef"},
-    {"phone": "+0987654321", "api_id": 67890, "api_hash": "fedcba0987654321fedcba"}
-]
-
+ACCOUNTS = [{"phone": "+917470479257", "api_id": 29400566, "api_hash": "8fd30dc496aea7c14cf675f59b74ec6f"}]
 TARGET_CHANNEL = "The_Grabbers"
 REPORT_REASONS = [
     types.InputReportReasonCopyright(),
